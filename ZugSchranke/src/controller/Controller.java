@@ -1,6 +1,5 @@
 package controller;
 
-
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -17,7 +16,7 @@ import java.util.ResourceBundle;
 public class Controller implements Initializable {
 
     //region properties
-    //region number Property
+    //region number Properties
     private int count = 0;
     private int countCar1 = 0;
     private int countCar2 = 0;
@@ -68,13 +67,7 @@ public class Controller implements Initializable {
     }
 
     private void handleTrainTrack() {
-        trainrailway.setDisable(false);
-        timerTrain = new Timeline(new KeyFrame(
-                Duration.millis(100),
-                ae -> onTimerTickTrain()
-        ));
-        timerTrain.setCycleCount(Animation.INDEFINITE);
-        timerTrain.play();
+        setupTrain();
     }
 
     //region TimerTick Methods
@@ -151,7 +144,7 @@ public class Controller implements Initializable {
         else return true;
     }
     private int getClosestLengthToRailway(){
-        return (int)(carroad1.getMax()/2-10);
+        return (int)((carroad1.getMax()/2)-5);
     }
     //endregion
 
@@ -193,6 +186,7 @@ public class Controller implements Initializable {
     //endregion
 
     //region beauty Methods
+
     private void handleBarrier(){
         switch (fireBarrier()){
             case 1:
@@ -251,6 +245,16 @@ public class Controller implements Initializable {
         timerCar3.play();
     }
     //endregion
+
+    private void setupTrain(){
+        trainrailway.setDisable(false);
+        timerTrain = new Timeline(new KeyFrame(
+                Duration.millis(100),
+                ae -> onTimerTickTrain()
+        ));
+        timerTrain.setCycleCount(Animation.INDEFINITE);
+        timerTrain.play();
+    }
 
     //region Message Methods
     private void setMessages(int scenario,TextArea area){
